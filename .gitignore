@@ -1,0 +1,8 @@
+.DS_Store
+*~
+*.diff
+*.patch
+*.bck
+*.bak
+.sublime-project.sublime-workspace
+node_modules

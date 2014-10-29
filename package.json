@@ -1,0 +1,29 @@
+{
+  "name": "fatb",
+  "version": "0.0.0",
+  "title": "FatB",
+  "description": "This is a FatB plugin.",
+  "homepage": "https://github.com/martinjezek/fatb.git",
+  "keywords": [],
+  "author": {
+    "name": "Martin Jezek",
+    "email": "info@martin-jezek.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:martinjezek/fatb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/martinjezek/fatb/issues"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://raw.githubusercontent.com/martinjezek/fatb/master/LICENSE"
+  },
+  "scripts": {
+  },
+  "devDependencies": {
+  },
+  "dependencies": {},
+  "private": true
+}

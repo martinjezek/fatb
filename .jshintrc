@@ -1,4 +1,5 @@
 {
+    "quotmark"      : true,
     "browser"       : true,
     "devel"         : true,
     "node"          : true,

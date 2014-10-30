@@ -20,7 +20,9 @@
     "type": "MIT",
     "url": "https://raw.githubusercontent.com/martinjezek/fatb/master/LICENSE"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "gulp test"
+  },
   "devDependencies": {
     "gulp": "^3.8.9",
     "gulp-jshint": "^1.8.6",

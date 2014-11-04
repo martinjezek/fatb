@@ -6,7 +6,8 @@ var gulp        = require('gulp'),
     argv        = require('yargs').argv,
     changelog   = require('conventional-changelog'),
     fs          = require('fs'),
-    runSequence = require('run-sequence');
+    runSequence = require('run-sequence'),
+    exec        = require('child_process').exec;
 
 
 // Defaut /task/
@@ -30,7 +31,7 @@ gulp.task('test', function(done) {
 // $ gulp release --version [major|minor|patch|prerelease]
 //
 gulp.task('release', function(done) {
-   runSequence('test', 'bump', 'changelog', done);
+   runSequence('test', 'bump', 'changelog', 'commit-release', done);
 });
 
 
@@ -84,4 +85,22 @@ gulp.task('changelog', function(done) {
                 done();
             });
         });
+});
+
+// Commit /release/
+// Commit all changes and add a new Git tag
+// $ gulp commit-release
+//
+gulp.task('commit-release', function(done) {
+    var pkg  = require('./package.json');
+    exec('git add -A', function(err) {
+        if (err) return done(err);
+        exec('git commit -m "chore: release v' + pkg.version + '"', function(err) {
+            if (err) return done(err);
+            exec('git tag "v' + pkg.version + '"', function(err) {
+                if (err) return done(err);
+                done();
+            });
+        });
+    });
 });

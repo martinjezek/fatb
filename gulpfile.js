@@ -5,33 +5,54 @@ var gulp        = require('gulp'),
     bump        = require('gulp-bump'),
     argv        = require('yargs').argv,
     changelog   = require('conventional-changelog'),
-    fs          = require('fs');
+    fs          = require('fs'),
+    runSequence = require('run-sequence');
 
-// Tasks /main/
-// Gulp main tasks are developed to speed up your most used development processes.
+
+// Defaut /task/
+// Gulp default is set to run all test tasks.
+// $ gulp
 //
-gulp.task('default' , ['test']);
-gulp.task('test'    , ['jshint']);
-gulp.task('release' , ['test', 'bump', 'changelog']); // --version [major|minor|patch|prerelease]
+gulp.task('default', ['test']);
+
+
+// Test /task/
+// Run all available test tasks.
+// $ gulp test
+//
+gulp.task('test', function(done) {
+    runSequence('jshint', done);
+});
+
+
+// Release /task/
+// Create a new version of the plugin.
+// $ gulp release --version [major|minor|patch|prerelease]
+//
+gulp.task('release', function(done) {
+   runSequence('test', 'bump', 'changelog', done);
+});
 
 
 // JSHint /test/
 // JavaScript Code Quality Tool - Helps to detect errors and potential problems in code.
+// $ gulp jshint
 //
 gulp.task('jshint', function() {
     return gulp.src([
-            '**/*.js',
-            '!**/node_modules/**/*.js',
-            '!**/bower_components/**/*.js'
-        ])
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(jshint.reporter('fail'));
+        '**/*.js',
+        '!**/node_modules/**/*.js',
+        '!**/bower_components/**/*.js'
+    ])
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
 
 
 // Bump /release/
 // Semantic Versioning - Increment a version number according to given --version [major|minor|patch|prerelease] flag.
+// $ gulp bump --version [major|minor|patch|prerelease]
 //
 gulp.task('bump', function() {
     var available = ['major', 'minor', 'patch', 'prerelease'],
@@ -49,6 +70,7 @@ gulp.task('bump', function() {
 
 // Changelog /release/
 // The CHANGELOG.md file is a log of changes made to a project, such as bug fixes, new features, etc.
+// $ gulp changelog
 //
 gulp.task('changelog', function(done) {
         var pkg  = require('./package.json');

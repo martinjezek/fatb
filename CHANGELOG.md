@@ -1,3 +1,13 @@
+### 0.0.2 (2014-11-04)
+
+
+#### Features
+
+* add git release chain commands #2 ([494c6cd0]([object Object]/commit/494c6cd0527e2a9fec2ad491e911ae368286ce43))
+* sort out asynchronous tasks using a sequence runner #2 ([7270a2a4]([object Object]/commit/7270a2a4f76eea511ab37a38df5e6093b3b00f53))
+* add first draft of release task with changelog generator #2 ([11f2938c]([object Object]/commit/11f2938cb408a5dc9dd6da077ad11847dc299949))
+
+
 ### 0.0.1 (2014-10-31)
 
 

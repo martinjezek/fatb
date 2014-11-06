@@ -1,3 +1,11 @@
+### 0.0.6 (2014-11-06)
+
+
+#### Features
+
+* add live reload support #12 ([f3af8dbd]([object Object]/commit/f3af8dbdd9671edf7bb071c2369dd2ccb7782c91))
+
+
 ### 0.0.5 (2014-11-06)
 
 

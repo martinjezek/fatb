@@ -9,14 +9,15 @@ var gulp        = require('gulp'),
     runSequence = require('run-sequence'),
     exec        = require('child_process').exec,
     jade        = require('gulp-jade'),
-    del         = require('del');
+    del         = require('del'),
+    connect     = require('gulp-connect');
 
 
 // Defaut /task/
-// Gulp default is set to run all test tasks.
+// Gulp default is set to run a Gulp webserver.
 // $ gulp
 //
-gulp.task('default', ['test']);
+gulp.task('default', ['connect']);
 
 
 // Test /task/
@@ -43,11 +44,11 @@ gulp.task('release', function(done) {
 //
 gulp.task('jshint', function() {
     return gulp.src([
-        '**/*.js',
-        '!**/node_modules/**/*.js',
-        '!**/bower_components/**/*.js'
+        './**/*.js',
+        '!./**/node_modules/**/*.js',
+        '!./**/bower_components/**/*.js'
     ])
-    .pipe(jshint('.jshintrc'))
+    .pipe(jshint('./.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'));
 });
@@ -58,8 +59,8 @@ gulp.task('jshint', function() {
 // $ gulp clean:demo
 gulp.task('clean:demo', function (done) {
     del([
-        'demo/build/*',
-        '!demo/build/.gitignore'
+        './demo/build/*',
+        '!./demo/build/.gitignore'
     ], { dot : true }, done);
 });
 
@@ -70,8 +71,8 @@ gulp.task('clean:demo', function (done) {
 //
 gulp.task('jade', ['clean:demo'], function() {
     return gulp.src([
-        'demo/src/**/*.jade',
-        '!demo/src/partials/*.jade'
+        './demo/src/**/*.jade',
+        '!./demo/src/partials/*.jade'
     ])
     .pipe(jade())
     .pipe(gulp.dest('demo/build/'));
@@ -130,5 +131,16 @@ gulp.task('commit-release', function(done) {
                 done();
             });
         });
+    });
+});
+
+// Connect /server/
+// Plugin to run a webserver (with LiveReload).
+// $ gulp connect
+//
+gulp.task('connect', function() {
+    connect.server({
+        root: './demo/build',
+        port: 9001
     });
 });

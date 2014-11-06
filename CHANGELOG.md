@@ -1,3 +1,11 @@
+### 0.0.4 (2014-11-06)
+
+
+#### Features
+
+* add Connect webserver #6 ([21c42de7]([object Object]/commit/21c42de7972c5c6abbe13919c1d48cb8185b5145))
+
+
 ### 0.0.3 (2014-11-06)
 
 

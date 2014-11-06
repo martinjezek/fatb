@@ -75,6 +75,7 @@ gulp.task('jade', ['clean:demo'], function() {
         '!./demo/src/partials/*.jade'
     ])
     .pipe(jade())
+    .pipe(connect.reload())
     .pipe(gulp.dest('demo/build/'));
 });
 
@@ -141,7 +142,8 @@ gulp.task('commit-release', function(done) {
 gulp.task('connect', function() {
     connect.server({
         root: './demo/build',
-        port: 9001
+        port: 9001,
+        livereload: true
     });
 });
 

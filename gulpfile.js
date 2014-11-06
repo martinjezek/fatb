@@ -14,10 +14,10 @@ var gulp        = require('gulp'),
 
 
 // Defaut /task/
-// Gulp default is set to run a Gulp webserver.
+// Gulp default is set to run a Gulp webserver with Gulp watches.
 // $ gulp
 //
-gulp.task('default', ['connect']);
+gulp.task('default', ['connect', 'watch']);
 
 
 // Test /task/
@@ -143,4 +143,13 @@ gulp.task('connect', function() {
         root: './demo/build',
         port: 9001
     });
+});
+
+
+// Watch /watch/
+// Plugin creates watcher that will spy on files for changes and call certain tasks when it happend.
+// $ gulp watch
+//
+gulp.task('watch', function () {
+    gulp.watch(['./demo/src/**/*.jade'], ['jade']);
 });

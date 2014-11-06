@@ -7,7 +7,9 @@ var gulp        = require('gulp'),
     changelog   = require('conventional-changelog'),
     fs          = require('fs'),
     runSequence = require('run-sequence'),
-    exec        = require('child_process').exec;
+    exec        = require('child_process').exec,
+    jade        = require('gulp-jade'),
+    del         = require('del');
 
 
 // Defaut /task/
@@ -51,6 +53,31 @@ gulp.task('jshint', function() {
 });
 
 
+// Clean:demo /clean/
+// Clean task remove all files and folders from Demo's build folder.
+// $ gulp clean:demo
+gulp.task('clean:demo', function (done) {
+    del([
+        'demo/build/*',
+        '!demo/build/.gitignore'
+    ], { dot : true }, done);
+});
+
+
+// Jade /compiler/
+// Jade is a Node template language.
+// $ gulp jade
+//
+gulp.task('jade', ['clean:demo'], function() {
+    return gulp.src([
+        'demo/src/**/*.jade',
+        '!demo/src/partials/*.jade'
+    ])
+    .pipe(jade())
+    .pipe(gulp.dest('demo/build/'));
+});
+
+
 // Bump /release/
 // Semantic Versioning - Increment a version number according to given --version [major|minor|patch|prerelease] flag.
 // $ gulp bump --version [major|minor|patch|prerelease]
@@ -86,6 +113,7 @@ gulp.task('changelog', function(done) {
             });
         });
 });
+
 
 // Commit /release/
 // Commit all changes and add a new Git tag

@@ -1,3 +1,11 @@
+### 0.0.5 (2014-11-06)
+
+
+#### Features
+
+* add gulp watches #11 ([c3d11b1c]([object Object]/commit/c3d11b1c5b7a60cb6300b43b562bc9059b7728c9))
+
+
 ### 0.0.4 (2014-11-06)
 
 

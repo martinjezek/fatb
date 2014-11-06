@@ -1,3 +1,11 @@
+### 0.0.3 (2014-11-06)
+
+
+#### Features
+
+* add Jade compiler and directory Cleaner #4 ([0914244b]([object Object]/commit/0914244b5c5c99b9ac06d30d96ceb64f98d4e13b))
+
+
 ### 0.0.2 (2014-11-04)
 
 

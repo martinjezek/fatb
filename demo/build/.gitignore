@@ -1,1 +1,2 @@
-partials
+**/partials
+bower_components

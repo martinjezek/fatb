@@ -1,0 +1,29 @@
+{
+  "name": "fatb",
+  "version": "0.0.6",
+  "main": [
+    "dist/js/fatb.js",
+    "dist/js/fatb.min.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "*.md",
+    "demo",
+    "bower_components",
+    "node_modules",
+    "src",
+    ".bowerrc",
+    ".gitattributes",
+    ".gitignore",
+    ".jshintrc",
+    ".sublime-project",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1"
+  },
+  "devDependencies": {
+    "bootstrap": "~3.3.0"
+  }
+}

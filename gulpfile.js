@@ -9,6 +9,7 @@ var gulp        = require('gulp'),
     runSequence = require('run-sequence'),
     exec        = require('child_process').exec,
     jade        = require('gulp-jade'),
+    sass        = require('gulp-sass'),
     del         = require('del'),
     connect     = require('gulp-connect');
 
@@ -60,23 +61,60 @@ gulp.task('jshint', function() {
 gulp.task('clean:demo', function (done) {
     del([
         './demo/build/*',
-        '!./demo/build/.gitignore'
+        '!./demo/build/.gitignore',
+        '!./demo/build/bower_components'
     ], { dot : true }, done);
+});
+
+
+// Clean:demo-html /clean/
+// Clean task remove all HTML files from Demo's build folder.
+// $ gulp clean:demo-html
+gulp.task('clean:demo-html', function (done) {
+    del([
+        './demo/build/**/*.html'
+    ], done);
+});
+
+
+// Clean:demo-css /clean/
+// Clean task remove all CSS files from Demo's build folder.
+// $ gulp clean:demo-css
+gulp.task('clean:demo-css', function (done) {
+    del([
+        './demo/build/css/*'
+    ], done);
 });
 
 
 // Jade /compiler/
 // Jade is a Node template language.
-// $ gulp jade
+// $ gulp jade:demo
 //
-gulp.task('jade', ['clean:demo'], function() {
+gulp.task('jade:demo', ['clean:demo-html'], function() {
     return gulp.src([
-        './demo/src/**/*.jade',
-        '!./demo/src/partials/*.jade'
+        './demo/src/jade/**/*.jade',
+        '!./demo/src/jade/partials/*.jade'
     ])
     .pipe(jade())
-    .pipe(connect.reload())
-    .pipe(gulp.dest('demo/build/'));
+    .pipe(gulp.dest('demo/build/'))
+    .pipe(connect.reload());
+});
+
+
+// Sass /compiler/
+// Sass is a CSS extension.
+// $ gulp sass:demo
+//
+gulp.task('sass:demo', ['clean:demo-css'], function() {
+    return gulp.src([
+        './demo/src/sass/**/*.scss',
+        './demo/src/sass/**/*.sass',
+        '!./demo/src/saas/partials/*.*'
+    ])
+    .pipe(sass())
+    .pipe(gulp.dest('demo/build/css/'))
+    .pipe(connect.reload());
 });
 
 
@@ -91,7 +129,8 @@ gulp.task('bump', function() {
         version = argv.version;
     }
     return gulp.src([
-            './package.json'
+            './package.json',
+            './bower.json'
         ])
         .pipe(bump({ type: version }))
         .pipe(gulp.dest('./'));
@@ -153,5 +192,6 @@ gulp.task('connect', function() {
 // $ gulp watch
 //
 gulp.task('watch', function () {
-    gulp.watch(['./demo/src/**/*.jade'], ['jade']);
+    gulp.watch(['./demo/src/jade/**/*.jade'], ['jade:demo']);
+    gulp.watch(['./demo/src/sass/**/*.scss', './demo/src/sass/**/*.sass'], ['sass:demo']);
 });

@@ -1,3 +1,11 @@
+### 0.0.7 (2014-11-09)
+
+
+#### Features
+
+* add SASS compiler # ([d3033b55]([object Object]/commit/d3033b554420002fd529ebaa3329a872a157a48d))
+
+
 ### 0.0.6 (2014-11-06)
 
 

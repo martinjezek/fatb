@@ -1,6 +1,6 @@
 {
   "name": "fatb",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": [
     "dist/js/fatb.js",
     "dist/js/fatb.min.js"

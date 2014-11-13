@@ -1,7 +1,6 @@
 'use strict';
 
-var pkg         = require('./package.json'),
-    gulp        = require('gulp'),
+var gulp        = require('gulp'),
     jshint      = require('gulp-jshint'),
     bump        = require('gulp-bump'),
     argv        = require('yargs').argv,
@@ -155,6 +154,7 @@ gulp.task('sass:demo', ['clean:demo-css'], function() {
 // $ gulp sass:demo
 //
 gulp.task('sass:dist', ['clean:dist-css'], function() {
+    var pkg = require('./package.json');
     return gulp.src([
         './src/sass/**/*.scss',
         './src/sass/**/*.sass',
@@ -194,7 +194,7 @@ gulp.task('bump', function() {
 // $ gulp changelog
 //
 gulp.task('changelog', function(done) {
-        pkg  = require('./package.json');
+        var pkg = require('./package.json');
         changelog({
             repository: pkg.repository,
             version: pkg.version
@@ -213,7 +213,7 @@ gulp.task('changelog', function(done) {
 // $ gulp commit-release
 //
 gulp.task('commit-release', function(done) {
-    pkg  = require('./package.json');
+    var pkg = require('./package.json');
     exec('git add -A', function(err) {
         if (err) return done(err);
         exec('git commit -m "chore: release v' + pkg.version + '"', function(err) {

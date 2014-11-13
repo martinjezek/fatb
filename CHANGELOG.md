@@ -1,3 +1,17 @@
+### 0.0.8 (2014-11-13)
+
+
+#### Bug Fixes
+
+* wrong package version getter ([dca3d4d2]([object Object]/commit/dca3d4d22c5dc408ae7a6147206988b02b0e49a5))
+
+
+#### Features
+
+* add a dist folder to the connect server scope #5 ([413311eb]([object Object]/commit/413311ebfd15677a36e1d59624a0d3b7c5368763))
+* add distribution task with sass concate ans minify plugins #5 ([18747989]([object Object]/commit/187479891cc248672b4061d9d8771ed642b5783b))
+
+
 ### 0.0.7 (2014-11-09)
 
 

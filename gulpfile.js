@@ -232,7 +232,7 @@ gulp.task('commit-release', function(done) {
 //
 gulp.task('connect', function() {
     connect.server({
-        root: './demo/build',
+        root: ['./demo/build', './dist'],
         port: 9001,
         livereload: true
     });

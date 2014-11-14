@@ -1,0 +1,1 @@
+"use strict";$(function(){$("#fatb").fatb({upperCase:!0})});

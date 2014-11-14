@@ -14,7 +14,8 @@ var gulp        = require('gulp'),
     connect     = require('gulp-connect'),
     concat      = require('gulp-concat'),
     minifyCSS   = require('gulp-minify-css'),
-    rename      = require('gulp-rename');
+    rename      = require('gulp-rename'),
+    uglify      = require('gulp-uglify');
 
 
 // Defaut /task/
@@ -42,11 +43,18 @@ gulp.task('release', function(done) {
 });
 
 
+// Demo /task/
+// Compile a source demo data to a Demo build folder.
+// $ gulp demo
+//
+gulp.task('demo', ['clean:demo', 'jade:demo', 'sass:demo', 'js:demo']);
+
+
 // Distribution /task/
-// Distribute a plugin data to a Dist folder.
+// Distribute a plugin source data to a Dist folder.
 // $ gulp dist
 //
-gulp.task('dist', ['clean:dist', 'sass:dist']);
+gulp.task('dist', ['clean:dist', 'sass:dist', 'js:dist']);
 
 
 // JSHint /test/
@@ -56,6 +64,8 @@ gulp.task('dist', ['clean:dist', 'sass:dist']);
 gulp.task('jshint', function() {
     return gulp.src([
         './**/*.js',
+        '!./**/build/**/*.js',
+        '!./**/dist/**/*.js',
         '!./**/node_modules/**/*.js',
         '!./**/bower_components/**/*.js'
     ])
@@ -66,7 +76,7 @@ gulp.task('jshint', function() {
 
 
 // Clean:dist /clean/
-// Clean task remove all files and folders from Dist's build folder.
+// Clean task remove all files and folders from the Dist build folder.
 // $ gulp clean:dist
 gulp.task('clean:dist', function (done) {
     del([
@@ -77,7 +87,7 @@ gulp.task('clean:dist', function (done) {
 
 
 // Clean:demo /clean/
-// Clean task remove all files and folders from Demo's build folder.
+// Clean task remove all files and folders from the Demo build folder.
 // $ gulp clean:demo
 gulp.task('clean:demo', function (done) {
     del([
@@ -89,7 +99,7 @@ gulp.task('clean:demo', function (done) {
 
 
 // Clean:demo-html /clean/
-// Clean task remove all HTML files from Demo's build folder.
+// Clean task remove all HTML files from the Demo build folder.
 // $ gulp clean:demo-html
 gulp.task('clean:demo-html', function (done) {
     del([
@@ -99,7 +109,7 @@ gulp.task('clean:demo-html', function (done) {
 
 
 // Clean:demo-css /clean/
-// Clean task remove all CSS files from Demo's build folder.
+// Clean task remove all CSS files from the Demo build folder.
 // $ gulp clean:demo-css
 gulp.task('clean:demo-css', function (done) {
     del([
@@ -108,8 +118,18 @@ gulp.task('clean:demo-css', function (done) {
 });
 
 
+// Clean:demo-js /clean/
+// Clean task remove all JS files from the Demo build folder.
+// $ gulp clean:demo-js
+gulp.task('clean:demo-js', function (done) {
+    del([
+        './demo/js/*'
+    ], done);
+});
+
+
 // Clean:dist-css /clean/
-// Clean task remove all CSS files from Dist's build folder.
+// Clean task remove all CSS files from the Dist folder.
 // $ gulp clean:dist-css
 gulp.task('clean:dist-css', function (done) {
     del([
@@ -118,8 +138,18 @@ gulp.task('clean:dist-css', function (done) {
 });
 
 
+// Clean:dist-js /clean/
+// Clean task remove all JS files from the Dist folder.
+// $ gulp clean:dist-js
+gulp.task('clean:dist-js', function (done) {
+    del([
+        './dist/js/*'
+    ], done);
+});
+
+
 // Jade /compiler/
-// Jade is a Node template language.
+// Compile all source Jade templates files as HTML files to the Demo build folder.
 // $ gulp jade:demo
 //
 gulp.task('jade:demo', ['clean:demo-html'], function() {
@@ -133,8 +163,28 @@ gulp.task('jade:demo', ['clean:demo-html'], function() {
 });
 
 
+// JS /compiler/
+// Beautify and Minify JS to the Demo folder.
+// $ gulp js:demo
+//
+gulp.task('js:demo', ['clean:demo-js'], function() {
+    return gulp.src([
+        './demo/src/js/**/*.js'
+    ])
+    .pipe(uglify({
+        mangle: false,
+        output: {
+            beautify: false,
+            comments: false
+        }
+    }))
+    .pipe(gulp.dest('./demo/build/js/'))
+    .pipe(connect.reload());
+});
+
+
 // Sass /compiler/
-// Sass is a CSS extension.
+// Compile and minify Sass styles to the Demo folder.
 // $ gulp sass:demo
 //
 gulp.task('sass:demo', ['clean:demo-css'], function() {
@@ -144,14 +194,15 @@ gulp.task('sass:demo', ['clean:demo-css'], function() {
         '!./demo/src/saas/partials/*.*'
     ])
     .pipe(sass())
+    .pipe(minifyCSS({ noAdvanced: true }))
     .pipe(gulp.dest('./demo/build/css/'))
     .pipe(connect.reload());
 });
 
 
 // Sass /compiler/
-// Sass is a CSS extension. Compile concate and minify CSS to Dist's folder.
-// $ gulp sass:demo
+// Compile, concate and minify Sass styles to the Dist folder.
+// $ gulp sass:dist
 //
 gulp.task('sass:dist', ['clean:dist-css'], function() {
     var pkg = require('./package.json');
@@ -164,8 +215,41 @@ gulp.task('sass:dist', ['clean:dist-css'], function() {
     .pipe(concat(pkg.name + '.css'))
     .pipe(gulp.dest('./dist/css/'))
     .pipe(minifyCSS({ noAdvanced: true }))
-    .pipe(rename(pkg.name + '.min.css'))
+    .pipe(rename({
+        suffix: '.min'
+    }))
     .pipe(gulp.dest('./dist/css/'))
+    .pipe(connect.reload());
+});
+
+
+// JS /compiler/
+// Beautify and Minify JS to the Dist folder.
+// $ gulp js:dist
+//
+gulp.task('js:dist', ['clean:dist-js'], function() {
+    return gulp.src([
+        './src/js/**/*.js'
+    ])
+    .pipe(uglify({
+        mangle: false,
+        output: {
+            beautify: true,
+            comments: /^!|@preserve|@license|@cc_on/i
+        }
+    }))
+    .pipe(gulp.dest('./dist/js/'))
+    .pipe(uglify({
+        mangle: false,
+        output: {
+            beautify: false,
+            comments: false
+        }
+    }))
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(gulp.dest('./dist/js/'))
     .pipe(connect.reload());
 });
 
@@ -240,13 +324,15 @@ gulp.task('connect', function() {
 
 
 // Watch /watch/
-// Plugin creates watcher that will spy on files for changes and call certain tasks when it happend.
+// Plugin creates watcher that will spy on files for changes and call certain tasks when it happens.
 // $ gulp watch
 //
 gulp.task('watch', function () {
     // demo
     gulp.watch(['./demo/src/jade/**/*.jade'], ['jade:demo']);
     gulp.watch(['./demo/src/sass/**/*.scss', './demo/src/sass/**/*.sass'], ['sass:demo']);
+    gulp.watch(['./demo/src/js/**/*.js'], ['js:demo']);
     // dist
     gulp.watch(['./src/sass/**/*.scss', './src/sass/**/*.sass'], ['sass:dist']);
+    gulp.watch(['./src/js/**/*.js'], ['js:dist']);
 });

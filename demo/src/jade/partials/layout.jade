@@ -3,4 +3,15 @@ html(lang="en")
     include ./head.jade
     body
         div.container
-            block content
+            block header
+                div.page-header
+                    h1 FatB
+                        = ' '
+                        small jQuery plugin
+
+                div.well
+                    p This is a FatB plugin.
+
+            div.jumbotron
+                block content
+

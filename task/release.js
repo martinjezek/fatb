@@ -21,8 +21,8 @@ module.exports = function(gulp, plugins) {
             version = plugins.argv.version;
         }
         return gulp.src([
-                './../package.json',
-                './../bower.json'
+                './package.json',
+                './bower.json'
             ])
             .pipe(plugins.bump({ type: version }))
             .pipe(gulp.dest('./'));

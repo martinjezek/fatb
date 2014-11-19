@@ -1,3 +1,11 @@
+### 0.1.1 (2014-11-19)
+
+
+#### Features
+
+* add gulp-header plugin #20 ([085c0d2c]([object Object]/commit/085c0d2c67cf4b47f40fc9ca8d54153177e54c0a))
+
+
 ## 0.1.0 (2014-11-18)
 
 

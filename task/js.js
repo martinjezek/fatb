@@ -35,6 +35,7 @@ module.exports = function(gulp, plugins) {
     // $ gulp js:dist
     //
     gulp.task('js:dist', ['clean:dist-js'], function() {
+        var pkg = require('./../package.json');
         return gulp.src([
             './src/js/**/*.js'
         ])
@@ -45,6 +46,7 @@ module.exports = function(gulp, plugins) {
                 comments: /^!|@preserve|@license|@cc_on/i
             }
         }))
+        .pipe(plugins.header(plugins.banner, { pkg : pkg } ))
         .pipe(gulp.dest('./dist/js/'))
         .pipe(plugins.uglify({
             mangle: false,
@@ -53,9 +55,8 @@ module.exports = function(gulp, plugins) {
                 comments: false
             }
         }))
-        .pipe(plugins.rename({
-            suffix: '.min'
-        }))
+        .pipe(plugins.rename({ suffix: '.min' }))
+        .pipe(plugins.header(plugins.banner, { pkg : pkg } ))
         .pipe(gulp.dest('./dist/js/'))
         .pipe(plugins.connect.reload());
     });

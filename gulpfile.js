@@ -11,6 +11,7 @@ var gulp            = require('gulp'),
         minifyCSS   : require('gulp-minify-css'),
         connect     : require('gulp-connect'),
         uglify      : require('gulp-uglify'),
+        header      : require('gulp-header'),
         runSequence : require('run-sequence'),
         changelog   : require('conventional-changelog'),
         exec        : require('child_process').exec,
@@ -27,5 +28,6 @@ require('./task/jade')(gulp, plugins);
 require('./task/sass')(gulp, plugins);
 require('./task/js')(gulp, plugins);
 require('./task/watch')(gulp, plugins);
+require('./task/banner')(gulp, plugins);
 require('./task/connect')(gulp, plugins);
 require('./task/release')(gulp, plugins);

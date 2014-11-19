@@ -40,11 +40,11 @@ module.exports = function(gulp, plugins) {
         ])
         .pipe(plugins.sass())
         .pipe(plugins.concat(pkg.name + '.css'))
+        .pipe(plugins.header(plugins.banner, { pkg : pkg } ))
         .pipe(gulp.dest('./dist/css/'))
-        .pipe(plugins.minifyCSS({ noAdvanced: true }))
-        .pipe(plugins.rename({
-            suffix: '.min'
-        }))
+        .pipe(plugins.minifyCSS({ noAdvanced: true, keepSpecialComments: 0 }))
+        .pipe(plugins.rename({ suffix: '.min' }))
+        .pipe(plugins.header(plugins.banner, { pkg : pkg } ))
         .pipe(gulp.dest('./dist/css/'))
         .pipe(plugins.connect.reload());
     });

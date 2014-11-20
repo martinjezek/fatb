@@ -15,6 +15,6 @@ describe('fatb', function() {
 
     it('should be chainable', function() {
         $element.fatb().addClass('chainable');
-        expect($element.hasClass('chainable')).toBeTruthy();
+        expect($element.hasClass('chainable')).toBe(true);
     });
 });

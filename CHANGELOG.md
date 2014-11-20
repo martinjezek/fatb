@@ -1,3 +1,11 @@
+### 0.1.3 (2014-11-20)
+
+
+#### Features
+
+* update gulp-watch plugin ([57d0f46a]([object Object]/commit/57d0f46ad6d14399c7c08fea6f52d195f7e29a8b))
+
+
 ### 0.1.2 (2014-11-20)
 
 

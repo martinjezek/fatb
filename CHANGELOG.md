@@ -1,3 +1,11 @@
+### 0.1.2 (2014-11-20)
+
+
+#### Features
+
+* add jasmine unit tests with phantomJS #7 ([b6a2d954]([object Object]/commit/b6a2d954d3392e051207e2f80384aff1dbfae453))
+
+
 ### 0.1.1 (2014-11-19)
 
 

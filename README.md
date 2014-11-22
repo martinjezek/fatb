@@ -6,6 +6,10 @@
 
 > This is a FatB plugin.
 
+## Release History
+
+See the [CHANGELOG.md](https://github.com/martinjezek/fatb/blob/master/CHANGELOG.md)
+
 ## License
 
 [MIT license](https://raw.githubusercontent.com/martinjezek/fatb/master/LICENSE)

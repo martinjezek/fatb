@@ -1,3 +1,13 @@
+## 0.2.0 (2014-11-22)
+
+
+#### Features
+
+* add a dist task after the bump task within the release task #26 ([63648b0a]([object Object]/commit/63648b0a59cea5ee2a882f9f43f5a94b627a7e0f))
+* update gulp-jade plugin #26 ([7b455ae1]([object Object]/commit/7b455ae1f896d86d750ab3a1009d7ea03be04322))
+* add dist and demo tasks to the default gulp task #26 ([54efbd53]([object Object]/commit/54efbd5386a716f0da2bd9737665e8fbd13da421))
+
+
 ### 0.1.3 (2014-11-20)
 
 

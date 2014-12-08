@@ -1,5 +1,5 @@
 /*!
- * FatB v0.2.0 (https://github.com/martinjezek/fatb)
+ * FatB v0.2.1 (https://github.com/martinjezek/fatb)
  * Martin Jezek <info@martin-jezek.com>
  * Licensed under MIT (https://raw.githubusercontent.com/martinjezek/fatb/master/LICENSE)
  */

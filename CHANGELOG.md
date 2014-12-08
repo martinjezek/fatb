@@ -1,3 +1,17 @@
+### 0.2.1 (2014-12-08)
+
+
+#### Bug Fixes
+
+* fix bower distribution #29 ([12c3f166]([object Object]/commit/12c3f166c8cb239da6b04ead753d7291be74bd67))
+
+
+#### Features
+
+* add a gulp copy task for demo data folder #29 ([cfe34148]([object Object]/commit/cfe34148e46759e558c868e1b4040db861cec73a))
+* update dependencies #29 ([67767d76]([object Object]/commit/67767d76792e990cda83bb6d7a2b2c9af651b700))
+
+
 ## 0.2.0 (2014-11-22)
 
 

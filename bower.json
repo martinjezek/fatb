@@ -14,12 +14,13 @@
     "bower_components",
     "node_modules",
     "src",
+    "task",
     ".bowerrc",
     ".gitattributes",
     ".gitignore",
     ".jshintrc",
     ".sublime-project",
-    "Gruntfile.js",
+    "gulpfile.js",
     "package.json"
   ],
   "dependencies": {

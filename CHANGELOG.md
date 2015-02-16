@@ -1,3 +1,16 @@
+### 0.2.2 (2015-02-16)
+
+
+#### Bug Fixes
+
+* **npm:** fix npm run scripts #32 ([478fa374]([object Object]/commit/478fa374363e216a83a28f9a0d6bdf382a4f3cdb))
+
+
+#### Features
+
+* **tests:** add some demo unit test + improve documentation #32 ([bdfb0f6a]([object Object]/commit/bdfb0f6ab0c4c954ab1bbd7d68097fdcec0ae85c))
+
+
 ### 0.2.1 (2014-12-08)
 
 

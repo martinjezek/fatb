@@ -6,6 +6,26 @@
 
 > This is a FatB plugin.
 
+## Usage
+
+Run the demo by the default Gulp task
+
+```shell
+gulp
+```
+
+Test the plugin using Gulp test task
+
+```shell
+gulp test
+```
+
+Release a new version
+
+```shell
+gulp release --version [major|minor|patch|prerelease]
+```
+
 ## Release History
 
 See the [CHANGELOG.md](https://github.com/martinjezek/fatb/blob/master/CHANGELOG.md)
